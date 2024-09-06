@@ -1,8 +1,6 @@
-package com.example.TaskFlow;
+package com.example.TaskFlow.models.entitys;
 
-import ch.qos.logback.core.status.Status;
 import com.example.TaskFlow.models.User;
-import jakarta.annotation.Priority;
 import jakarta.persistence.*;
 import lombok.Data;
 
