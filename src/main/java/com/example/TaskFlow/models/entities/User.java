@@ -1,4 +1,4 @@
-package com.example.TaskFlow.models.entitys;
+package com.example.TaskFlow.models.entities;
 
 import lombok.Data;
 

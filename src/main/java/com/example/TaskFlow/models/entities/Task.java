@@ -1,5 +1,8 @@
-package com.example.TaskFlow.models.entitys;
+package com.example.TaskFlow.models.entities;
 
+import ch.qos.logback.core.status.Status;
+import com.example.TaskFlow.models.User;
+import jakarta.annotation.Priority;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -51,5 +54,11 @@ public class Task {
 
     public enum Status {
         PENDING, COMPLETED
+        // sau boolean completed ?
     }
 }
+//adauga te rog si "comment"
+// :"Users should be able to add comments to tasks for discussion and updates.
+
+
+
