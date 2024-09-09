@@ -41,6 +41,13 @@ public class TaskService {
         task.setStatus(Task.Status.COMPLETED);
         task.setProgress(100);
         return taskRepository.save(task);
+
+
+        }
+    public void deleteTask (Long id){
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+        taskRepository.delete(task);
     }
 }
 
