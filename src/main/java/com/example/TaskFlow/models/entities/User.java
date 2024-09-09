@@ -1,9 +1,7 @@
-package com.example.TaskFlow.models.entitys;
+package com.example.TaskFlow.models.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
-import java.util.UUID;
 
 @Entity
 @Data
