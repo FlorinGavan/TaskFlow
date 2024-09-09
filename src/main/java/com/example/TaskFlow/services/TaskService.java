@@ -9,19 +9,19 @@ import java.util.Set;
 
 public interface TaskService {
 
-    Task createTask();
-
-    HashMap<User, Task> assignTask();
-
-    Task updateProgress();
-
-    Task isCompleted();
-
-    Set<Task> viewAllTasks();
-
-    Task getTaskReport();
-
-    Task commetnTask();
-
-    List<Task> sortTasks();
+//    Task createTask(Task task);
+//
+//    HashMap<User, Task> assignTask();
+//
+//    Task updateProgress();
+//
+//    Task isCompleted();
+//
+//    Set<Task> viewAllTasks();
+//
+//    Task getTaskReport();
+//
+//    Task commetnTask();
+//
+//    List<Task> sortTasks();
 }
