@@ -1,5 +1,6 @@
 package com.example.TaskFlow.services;
 
+import com.example.TaskFlow.models.dtos.TaskDTO;
 import com.example.TaskFlow.models.entities.Task;
 import com.example.TaskFlow.models.entities.User;
 
@@ -24,4 +25,6 @@ public interface TaskService {
 //    Task commetnTask();
 //
 //    List<Task> sortTasks();
+
+    TaskDTO createTask(TaskDTO taskDTO);
 }
