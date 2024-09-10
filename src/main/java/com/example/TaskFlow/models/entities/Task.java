@@ -1,9 +1,8 @@
-package com.example.TaskFlow.models.entitys;
+package com.example.TaskFlow.models.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
 
-import javax.xml.stream.events.Comment;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +41,8 @@ public class Task {
     @Column(name = "status")
     private Status status;
 
-    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> comments = new ArrayList<>();
+//    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Comment> comments = new ArrayList<>();
 
     public enum Priority {
         HIGH, MEDIUM, LOW
