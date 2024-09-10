@@ -27,5 +27,4 @@ public interface TaskService {
 //
 //    List<Task> sortTasks();
 
-    TaskDTO createTask(TaskDTO taskDTO);
 }
