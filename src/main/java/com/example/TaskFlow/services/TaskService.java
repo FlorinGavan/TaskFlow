@@ -1,5 +1,6 @@
 package com.example.TaskFlow.services;
 
+import com.example.TaskFlow.models.dtos.TaskDTO;
 import com.example.TaskFlow.models.entities.Task;
 import com.example.TaskFlow.models.entities.User;
 
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface TaskService {
+    TaskDTO createTask(TaskDTO taskDTO);
 
 //    Task createTask(Task task);
 //
