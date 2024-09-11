@@ -2,7 +2,7 @@ package com.example.TaskFlow.services;
 
 import com.example.TaskFlow.models.dtos.UserDTO;
 import com.example.TaskFlow.models.entities.User;
-import com.example.TaskFlow.repository.UserRepository;
+import com.example.TaskFlow.repositories.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
