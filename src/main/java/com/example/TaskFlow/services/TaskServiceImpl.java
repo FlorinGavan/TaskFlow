@@ -4,10 +4,7 @@ package com.example.TaskFlow.services;
 import com.example.TaskFlow.models.entities.Task;
 import com.example.TaskFlow.repositories.TaskRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -20,10 +17,10 @@ public class TaskServiceImpl implements TaskService {
         this.objectMapper = objectMapper;
     }
 
-//    public Task createTask(Task task) {
-//        return taskRepository.save(task);
-//    }
-//
+    public Task createTask(Task task) {
+        return taskRepository.save(task);
+    }
+
 //    public List<Task> getAllTasks() {
 //        return taskRepository.findAll();
 //    }

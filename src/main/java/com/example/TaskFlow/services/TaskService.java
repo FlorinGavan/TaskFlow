@@ -9,7 +9,7 @@ import java.util.Set;
 
 public interface TaskService {
 
-//    Task createTask(Task task);
+    Task createTask(Task task);
 //
 //    HashMap<User, Task> assignTask();
 //

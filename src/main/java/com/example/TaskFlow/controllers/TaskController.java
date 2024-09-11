@@ -18,11 +18,11 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    //    @PostMapping
-//    public ResponseEntity<Task> createTask(@RequestBody Task task) {
-//        Task newTask = taskService.createTask(task);
-//        return ResponseEntity.ok(newTask);
-//    }
+        @PostMapping
+    public ResponseEntity<Task> createTask(@RequestBody Task task) {
+        Task newTask = taskService.createTask(task);
+        return ResponseEntity.ok(newTask);
+    }
 //
 //    @GetMapping
 //    public ResponseEntity<List<Task>> getAllTasks() {
