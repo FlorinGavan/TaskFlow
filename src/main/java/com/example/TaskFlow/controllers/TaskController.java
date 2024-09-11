@@ -3,11 +3,8 @@ package com.example.TaskFlow.controllers;
 import com.example.TaskFlow.models.dtos.TaskDTO;
 import com.example.TaskFlow.models.entities.Task;
 import com.example.TaskFlow.services.TaskService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/tasks")
@@ -20,7 +17,7 @@ public class TaskController {
         this.taskService = taskService;
     }
     @PostMapping("/api/tasks")
-    public ResponseEntity<TaskDTO> createTask(@RequestBody TaskDTO taskDTO){
+    public ResponseEntity<Task> createTask(@RequestBody TaskDTO taskDTO){
         return ResponseEntity.ok(taskService.createTask(taskDTO));
     }
 
