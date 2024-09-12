@@ -1,27 +1,20 @@
 package com.example.TaskFlow.services;
 
 import com.example.TaskFlow.models.entities.Task;
-import com.example.TaskFlow.models.entities.User;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 public interface TaskService {
 
     Task createTask(Task task);
-//
-//    HashMap<User, Task> assignTask();
-//
-//    Task updateProgress();
-//
-//    Task isCompleted();
-//
-//    Set<Task> viewAllTasks();
-//
-//    Task getTaskReport();
-//
-//    Task commetnTask();
-//
-//    List<Task> sortTasks();
+//    Task assignTask(Long taskId, Long userId);
+//    Task updateTask(Long taskId, Task updatedTask);
+//    Task updateTaskProgress(Long taskId, int progress);
+//    Task markTaskAsCompleted(Long taskId);
+//    List<Task> getAllTasks();
+//    Task getTaskById(Long taskId);
+//    void deleteTask(Long taskId);
+//    List<Task> filterTasksByPriority(String priority);
+//    List<Task> filterTasksByDueDate();
+//    List<Task> getTasksByAssignee(Long userId);
 }

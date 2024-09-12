@@ -41,6 +41,10 @@ public class Task {
     @Column(name = "status")
     private Status status;
 
+    @Column(name = "completed")
+    private boolean completed;
+
+
 //    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<Comment> comments = new ArrayList<>();
 
