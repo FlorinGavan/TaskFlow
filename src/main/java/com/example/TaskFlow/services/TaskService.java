@@ -1,12 +1,13 @@
 package com.example.TaskFlow.services;
 
+import com.example.TaskFlow.models.dtos.TaskDTO;
 import com.example.TaskFlow.models.entities.Task;
 
 import java.util.List;
 
 public interface TaskService {
 
-    Task createTask(Task task);
+    TaskDTO createTask(TaskDTO taskDTO);
 //    Task assignTask(Long taskId, Long userId);
 //    Task updateTask(Long taskId, Task updatedTask);
 //    Task updateTaskProgress(Long taskId, int progress);
