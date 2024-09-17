@@ -43,20 +43,20 @@ public class TaskServiceImpl implements TaskService {
 //        }
 //        return null;
 //    }
-//    @Override
-//    public Task updateTask(Long taskId, Task updatedTask) {
-//        Optional<Task> taskOptional = taskRepository.findById(taskId);
-//
-//        if (taskOptional.isPresent()) {
-//            Task task = taskOptional.get();
-//            task.setTitle(updatedTask.getTitle());
-//            task.setDescription(updatedTask.getDescription());
-//            task.setDueDate(updatedTask.getDueDate());
-//            task.setPriority(updatedTask.getPriority());
-//            return taskRepository.save(task);
-//        }
-//        return null;
-//    }
+    @Override
+    public TaskDTO updateTask(Long taskId, TaskDTO updatedTask) {
+        Optional<Task> taskOptional = taskRepository.findById(taskId);
+
+        if (taskOptional.isPresent()) {
+            Task task = taskOptional.get();
+            task.setTitle(updatedTask.getTitle());
+            task.setDescription(updatedTask.getDescription());
+            task.setDueDate(updatedTask.getDueDate());
+            task.setPriority(updatedTask.getPriority());
+            return taskRepository.save(task);
+        }
+        return null;
+    }
 //    @Override
 //    public Task updateTaskProgress(Long taskId, int progress) {
 //        Optional<Task> taskOptional = taskRepository.findById(taskId);
