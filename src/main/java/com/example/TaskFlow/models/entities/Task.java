@@ -10,7 +10,6 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "tasks")
-
 public class Task {
 
     @Id
@@ -30,10 +29,6 @@ public class Task {
     @Column(name = "priority")
     private Priority priority;
 
-    @ManyToOne
-    @JoinColumn(name = "assignee_id", referencedColumnName = "id")
-    private User assignee;
-
     @Column(name = "progress")
     private int progress;
 
@@ -44,9 +39,12 @@ public class Task {
     @Column(name = "completed")
     private boolean completed;
 
+    @ManyToOne
+    @JoinColumn(name = "assignee_id", referencedColumnName = "id")
+    private User assignee;
 
-//    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<Comment> comments = new ArrayList<>();
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
 
     public enum Priority {
         HIGH, MEDIUM, LOW
@@ -55,6 +53,4 @@ public class Task {
     public enum Status {
         PENDING, COMPLETED
     }
-
-
 }
