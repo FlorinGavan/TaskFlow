@@ -9,18 +9,17 @@ import lombok.Data;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
 
-@ManyToOne
-@JoinColumn(name = "user_id")
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-@OneToMany
-@JoinColumn(name ="task_id")
-    private Task task;
+//    @ManyToOne
+//    @JoinColumn(name = "description")
+//    private String description;
 
-@ManyToOne
-@JoinColumn(name = "description")
-    private String description;
+    @ManyToOne
+    @JoinColumn(name = "task_id")
+    private Task task;
 }
