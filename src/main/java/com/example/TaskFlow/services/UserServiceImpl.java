@@ -15,15 +15,20 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final ObjectMapper objectMapper;
+    private final UserValidationService userValidationService;
 
-    public UserServiceImpl(UserRepository userRepository, ObjectMapper objectMapper) {
+    public UserServiceImpl(UserRepository userRepository, ObjectMapper objectMapper, UserValidationService userValidationService) {
         this.userRepository = userRepository;
         this.objectMapper = objectMapper;
+        this.userValidationService = userValidationService;
     }
 
     @Override
     public UserDTO createUser(UserDTO userDTO) {
         User userEntitySave = objectMapper.convertValue(userDTO, User.class);
+        userValidationService.firstNameValidation(userDTO.getFirstName());
+        userValidationService.lastNAmeValidation(userDTO.getLastName());
+        userValidationService.emailValidation(userDTO.getEmail());
         User userResponseEntity = userRepository.save(userEntitySave);
         log.info("User created with id: {}", userResponseEntity.getId());
         return objectMapper.convertValue(userResponseEntity, UserDTO.class);
