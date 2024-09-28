@@ -1,47 +1,48 @@
 package com.example.TaskFlow.services;
 
+import com.example.TaskFlow.exceptions.UserCreateException;
+import com.example.TaskFlow.models.dtos.UserDTO;
+import com.example.TaskFlow.models.entities.User;
+import com.example.TaskFlow.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @Slf4j
 public class UserValidationServiceImpl implements UserValidationService {
-@Override
-public  void emailValidation (String email) {
-    if (!email.trim().contains("@") || email.trim().length() < 4){
-        throw new RuntimeException("Email is not valid");
-    }
-}
 
-    @Override
-    public void firstNameValidation(String firstName) throws IllegalArgumentException {
-        firstName = firstName.trim();
+    private final UserRepository userRepository;
 
-        if (firstName.isEmpty()) {
-            throw new IllegalArgumentException("First name cannot be empty");
-        }
-        if (firstName.trim().length() < 2) {
-            throw new IllegalArgumentException("First name is too short");
-        }
-        if (!firstName.matches("[a-zA-Z]+")) {
-            throw new IllegalArgumentException("Symbols and Numbers are not allowed");
-        }
-        log.info("First name is valid {} ", firstName);
+    public UserValidationServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
-    public void lastNAmeValidation(String lastName) throws IllegalArgumentException {
-        lastName = lastName.trim();
+    public void validateUserDto(UserDTO userDTO) {
+        Optional<User> user = userRepository.findUserByEmail(userDTO.getEmail());
 
-        if (lastName.isEmpty()) {
-            throw new IllegalArgumentException("Last name cannot be empty");
+        if (userDTO.getFirstName().isEmpty()) {
+            throw new UserCreateException("First name is required");
         }
-        if (lastName.trim().length() < 2) {
-            throw new IllegalArgumentException("Last name is too short");
+        if (userDTO.getLastName().isEmpty()) {
+            throw new UserCreateException("Last name is required");
         }
-        if (!lastName.matches("[a-zA-Z]+")) {
-            throw new IllegalArgumentException("Symbols and Numbers are not allowed");
+        if (userDTO.getFirstName().length() < 2) {
+            throw new UserCreateException("Your first name is too short");
         }
-        log.info("Last name is valid {} ", lastName);
+        if (userDTO.getLastName().length() < 2) {
+            throw new UserCreateException("Your last name is too short");
+        }
+        if (!userDTO.getFirstName().matches("[a-zA-Z]+") || !userDTO.getLastName().matches("[a-zA-Z]+")) {
+            throw new UserCreateException("Numbers and Symbols are not allowed");
+        }
+        if (userDTO.getEmail().isEmpty()) {
+            throw new UserCreateException("Please add an email ");
+        }
+        if (user.isPresent()) {
+            throw new UserCreateException("Email already used. Try again with another email!");
+        }
     }
 }
