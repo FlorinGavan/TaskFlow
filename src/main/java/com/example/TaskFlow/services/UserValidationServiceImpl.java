@@ -1,12 +1,10 @@
 package com.example.TaskFlow.services;
 
 import com.example.TaskFlow.exceptions.UserCreateException;
+import com.example.TaskFlow.models.dtos.UserDTO;
 import com.example.TaskFlow.models.entities.User;
 import com.example.TaskFlow.repositories.UserRepository;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -22,47 +20,29 @@ public class UserValidationServiceImpl implements UserValidationService {
     }
 
     @Override
-public  void validateEmail (String email) {
-        Optional<User> user = userRepository.findUserByEmail(email);
-        if (email.isEmpty()){
-            throw  new UserCreateException("Please add an email");
+    public void validateUserDto(UserDTO userDTO) {
+        Optional<User> user = userRepository.findUserByEmail(userDTO.getEmail());
+
+        if (userDTO.getFirstName().isEmpty()) {
+            throw new UserCreateException("First name is required");
         }
-        if (user != null){
+        if (userDTO.getLastName().isEmpty()) {
+            throw new UserCreateException("Last name is required");
+        }
+        if (userDTO.getFirstName().length() < 2) {
+            throw new UserCreateException("Your first name is too short");
+        }
+        if (userDTO.getLastName().length() < 2) {
+            throw new UserCreateException("Your last name is too short");
+        }
+        if (!userDTO.getFirstName().matches("[a-zA-Z]+") || !userDTO.getLastName().matches("[a-zA-Z]+")) {
+            throw new UserCreateException("Numbers and Symbols are not allowed");
+        }
+        if (userDTO.getEmail().isEmpty()) {
+            throw new UserCreateException("Please add an email ");
+        }
+        if (user.isPresent()) {
             throw new UserCreateException("Email already used. Try again with another email!");
         }
-
-}
-
-    @Override
-    public void firstNameValidation(String firstName) throws UserCreateException {
-        firstName = firstName.trim();
-
-        if (firstName.isEmpty()) {
-            throw new UserCreateException("First name cannot be empty");
-        }
-        if (firstName.trim().length() < 2) {
-            throw new UserCreateException("First name is too short");
-        }
-        if (!firstName.matches("[a-zA-Z]+")) {
-            throw new UserCreateException("Symbols and Numbers are not allowed on first name");
-        }
-        log.info("First name is valid {} ", firstName);
     }
-
-    @Override
-    public void lastNAmeValidation(String lastName) throws UserCreateException {
-        lastName = lastName.trim();
-
-        if (lastName.isEmpty()) {
-            throw new UserCreateException("Last name cannot be empty");
-        }
-        if (lastName.trim().length() < 2) {
-            throw new UserCreateException("Last name is too short");
-        }
-        if (!lastName.matches("[a-zA-Z]+")) {
-            throw new UserCreateException("Symbols and Numbers are not allowed on last name");
-        }
-        log.info("Last name is valid {} ", lastName);
-    }
-
 }

@@ -26,9 +26,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO createUser(UserDTO userDTO) {
         User userEntitySave = objectMapper.convertValue(userDTO, User.class);
-        userValidationService.firstNameValidation(userDTO.getFirstName());
-        userValidationService.lastNAmeValidation(userDTO.getLastName());
-        userValidationService.validateEmail(userDTO.getEmail());
+        userValidationService.validateUserDto(userDTO);
+
         User userResponseEntity = userRepository.save(userEntitySave);
         log.info("User created with id: {}", userResponseEntity.getId());
         return objectMapper.convertValue(userResponseEntity, UserDTO.class);

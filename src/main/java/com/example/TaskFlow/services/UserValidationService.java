@@ -1,8 +1,8 @@
 package com.example.TaskFlow.services;
 
+import com.example.TaskFlow.models.dtos.UserDTO;
+
 public interface UserValidationService {
 
-    void validateEmail(String email);
-    void firstNameValidation(String firstName);
-    void lastNAmeValidation(String lastName);
+ void validateUserDto (UserDTO userDTO);
 }

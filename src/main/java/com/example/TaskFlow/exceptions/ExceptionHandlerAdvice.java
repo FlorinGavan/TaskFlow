@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.Map;
+
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 @ControllerAdvice
@@ -22,17 +23,16 @@ public class ExceptionHandlerAdvice {
     }
 
     @ExceptionHandler(UserCreateException.class)
-    public ResponseEntity<String>userCreateException(UserCreateException userCreateException) {
-        return  new ResponseEntity<>(objectToString(Map.of("message",userCreateException.getMessage())), BAD_REQUEST);
+    public ResponseEntity<String> userCreateException(UserCreateException userCreateException) {
+        return new ResponseEntity<>(objectToString(Map.of("message", userCreateException.getMessage())), BAD_REQUEST);
     }
 
-
-
-    private  String objectToString(Object response){
+    private String objectToString(Object response) {
         try {
             return objectMapper.writeValueAsString(response);
         } catch (JsonProcessingException e) {
             log.error("Error processing response to string");
-        }return "Internal error";
+        }
+        return "Internal error";
     }
 }
