@@ -6,6 +6,7 @@ import com.example.TaskFlow.models.entities.Task;
 import com.example.TaskFlow.models.entities.User;
 import com.example.TaskFlow.repositories.TaskRepository;
 import com.example.TaskFlow.repositories.UserRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,21 +16,24 @@ import java.util.Optional;
 
 @Service
 public class TaskServiceImpl implements TaskService {
+    private final ObjectMapper objectMapper;
     @Autowired
     private TaskRepository taskRepository;
     @Autowired
     private UserRepository userRepository;
 
-    public TaskServiceImpl(TaskRepository taskRepository, UserRepository userRepository) {
+    public TaskServiceImpl(ObjectMapper objectMapper, TaskRepository taskRepository, UserRepository userRepository) {
+        this.objectMapper = objectMapper;
         this.taskRepository = taskRepository;
         this.userRepository = userRepository;
     }
 
     @Override
     public TaskDTO createTask(TaskDTO taskDTO) {
-        return null;
+        Task taskEntityToBeSaved = objectMapper.convertValue(taskDTO, Task.class);
+        Task taskResponseEntity = taskRepository.save(taskEntityToBeSaved);
+        return objectMapper.convertValue(taskResponseEntity, TaskDTO.class);
     }
-
 //    @Override
 //    public Task assignTask(Long taskId, Long userId) {
 //        Optional<Task> taskOptional = taskRepository.findById(taskId);

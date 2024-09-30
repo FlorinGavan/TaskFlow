@@ -8,10 +8,15 @@ import lombok.Data;
 public class CommentDTO {
     private Long id;
 
-    private User user;
+    private  User user;
 
     private Task task;
 
     private String description;
 
+    public void setUser(String testUser) {
+    }
+
+    public void setTask(String s) {
+    }
 }
