@@ -27,4 +27,22 @@ public class TaskDTO {
     private int progress;
 
     private Task.Status status;
+
+    public void setdescription(String testDescription) {
+    }
+
+    public void setdueDate(String testDueDate) {
+    }
+
+    public void setpriority(String testPriority) {
+    }
+
+    public void setassignee(String testAssignee) {
+    }
+
+    public void setprogress(String testProgress) {
+    }
+
+    public void setstatus(String testStatus) {
+    }
 }

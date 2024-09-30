@@ -46,6 +46,26 @@ public class Task {
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
+    public void setdescription(String testDescription) {
+        
+    }
+
+    public void setdueDate(String testDueDate) {
+    }
+
+    public void setpriority(String testPriority) {
+    }
+
+    public void setassignee(String testAssignee) {
+    }
+
+    public void setprogress(String testProgress) {
+    }
+
+    public void setstatus(String testStatus) {
+
+    }
+
     public enum Priority {
         HIGH, MEDIUM, LOW
     }
