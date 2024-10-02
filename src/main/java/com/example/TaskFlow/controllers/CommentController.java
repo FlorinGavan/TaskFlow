@@ -14,7 +14,8 @@ public class CommentController {
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
     }
-    @PostMapping("/api/comment/{id}")
+
+    @PostMapping("/api/comment/{userId}")
     public ResponseEntity<CommentDTO> createComment(@RequestBody CommentDTO commentDTO){
         return ResponseEntity.ok(commentService.createComment(commentDTO));
     }

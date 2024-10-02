@@ -45,4 +45,12 @@ public class UserValidationServiceImpl implements UserValidationService {
             throw new UserCreateException("Email already used. Try again with another email!");
         }
     }
+
+    @Override
+    public void validateUserBeforeEditing(UserDTO userDTO) {
+         Optional<User> user = userRepository.findUserByEmail(userDTO.getEmail());
+            if (user.isPresent()) {
+            throw new UserCreateException("Email already used. Try again with another email!");
+        }
+    }
 }

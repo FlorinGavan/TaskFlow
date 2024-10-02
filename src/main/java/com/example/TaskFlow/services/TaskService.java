@@ -7,15 +7,13 @@ import java.util.List;
 
 public interface TaskService {
 
-    TaskDTO createTask(TaskDTO taskDTO);
-//    Task assignTask(Long taskId, Long userId);
-//    Task updateTask(Long taskId, Task updatedTask);
+    TaskDTO createTask(TaskDTO taskDTO ,Long creatorUserId);
+    TaskDTO updateTask(Long taskId, TaskDTO taskDTO) ;
+    List<TaskDTO> getAllTasks();
+    void deleteTask(Long id);
+    List<Task> findTaskByPriority(Task.Priority priority);
+    TaskDTO assignedTask(Long taskId, Long userId);
 //    Task updateTaskProgress(Long taskId, int progress);
 //    Task markTaskAsCompleted(Long taskId);
-//    List<Task> getAllTasks();
-//    Task getTaskById(Long taskId);
-//    void deleteTask(Long taskId);
-//    List<Task> filterTasksByPriority(String priority);
-//    List<Task> filterTasksByDueDate();
 //    List<Task> getTasksByAssignee(Long userId);
 }

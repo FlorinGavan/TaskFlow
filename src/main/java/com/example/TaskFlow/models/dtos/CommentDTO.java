@@ -6,12 +6,10 @@ import lombok.Data;
 
 @Data
 public class CommentDTO {
+
     private Long id;
-
-    private User user;
-
-    private Task task;
-
-    private String description;
+    private Long taskId;
+    private Long developerId;
+    private String text;
 
 }
