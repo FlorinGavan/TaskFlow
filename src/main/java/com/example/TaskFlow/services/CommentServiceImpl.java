@@ -1,5 +1,6 @@
 package com.example.TaskFlow.services;
 
+import com.example.TaskFlow.exceptions.CommentNotFound;
 import com.example.TaskFlow.models.dtos.CommentDTO;
 import com.example.TaskFlow.models.entities.Comment;
 import com.example.TaskFlow.repositories.CommentRepository;
@@ -24,21 +25,33 @@ public class CommentServiceImpl implements CommentService {
     public CommentDTO createComment(CommentDTO commentDTO) {
         Comment commentEntityToBeSaved = objectMapper.convertValue(commentDTO, Comment.class);
         Comment commentResponseEntity = commentRepository.save(commentEntityToBeSaved);
+        log.info("Comment is added");
         return objectMapper.convertValue(commentResponseEntity, CommentDTO.class);
     }
 
     @Override
-    public List<CommentDTO> deleteComment() {
-        return null;
+    public void deleteComment(Long id)
+    {
+        log.info("Comment was deleted");
+        commentRepository.deleteById(id);
     }
 
     @Override
-    public List<CommentDTO> updateComment() {
-        return null;
+    public CommentDTO updateComment(Long id ,CommentDTO commentDTO) {
+        Comment existingComment = commentRepository.findCommentById(id)
+                .orElseThrow(() -> new CommentNotFound(id));
+
+        if (commentDTO.getText() != null){
+            existingComment.setText(commentDTO.getText());
+        }
+        Comment updatedValue = commentRepository.save(existingComment);
+        log.info("Comment updated");
+        return  objectMapper.convertValue(updatedValue, CommentDTO.class);
     }
 
     @Override
-    public List<CommentDTO> getComment() {
-        return null;
+    public List<CommentDTO> getComments() {
+        List<Comment> comments = commentRepository.findAll();
+        return comments.stream().map(comment -> objectMapper.convertValue(comment,CommentDTO.class)).toList();
     }
 }

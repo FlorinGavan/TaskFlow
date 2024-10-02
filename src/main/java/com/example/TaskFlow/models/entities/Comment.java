@@ -3,23 +3,27 @@ package com.example.TaskFlow.models.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 @Entity
 @Table
 public class Comment {
-    @Id
+ @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "task_id")
+    private Task task;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-//    @ManyToOne
-//    @JoinColumn(name = "description")
-//    private String description;
+    @Column(name = "text")
+    private String text;
 
-    @ManyToOne
-    @JoinColumn(name = "task_id")
-    private Task task;
+    @Column(name = "comment_date")
+    private LocalDateTime commentDate;
 }

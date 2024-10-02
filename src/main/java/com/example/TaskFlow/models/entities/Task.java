@@ -16,7 +16,7 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "title", nullable = false)
+    @Column(name = "title", unique = true)
     private String title;
 
     @Column(name = "description", length = 1000)
@@ -36,21 +36,26 @@ public class Task {
     @Column(name = "status")
     private Status status;
 
-    @Column(name = "completed")
-    private boolean completed;
+    //  @Column(name = "completed")
+//    private boolean completed;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "assigned_user_id")
+    private User assignedUser;
 
-    @ManyToOne
-    @JoinColumn(name = "assignee_id", referencedColumnName = "id")
-    private User assignee;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "created_by_id")
+    private User createdBy;
 
-    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
     public enum Priority {
-        HIGH, MEDIUM, LOW
+        HIGH,
+        MEDIUM,
+        LOW;
     }
 
     public enum Status {
-        PENDING, COMPLETED
+        PENDING, COMPLETED;
     }
 }

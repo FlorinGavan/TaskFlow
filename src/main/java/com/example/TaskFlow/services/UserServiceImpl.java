@@ -1,5 +1,6 @@
 package com.example.TaskFlow.services;
 
+import com.example.TaskFlow.exceptions.UserNotFound;
 import com.example.TaskFlow.models.dtos.UserDTO;
 import com.example.TaskFlow.models.entities.User;
 import com.example.TaskFlow.repositories.UserRepository;
@@ -23,6 +24,7 @@ public class UserServiceImpl implements UserService {
         this.userValidationService = userValidationService;
     }
 
+
     @Override
     public UserDTO createUser(UserDTO userDTO) {
         User userEntitySave = objectMapper.convertValue(userDTO, User.class);
@@ -33,10 +35,27 @@ public class UserServiceImpl implements UserService {
         return objectMapper.convertValue(userResponseEntity, UserDTO.class);
     }
 
+
+    // Method to update a user partially
     @Override
-    public UserDTO updateUser(UserDTO userDTO) {
-        User updateValue = userRepository.save(objectMapper.convertValue(userDTO, User.class));
-        return objectMapper.convertValue(updateValue, UserDTO.class);
+    public UserDTO updateUser(Long id, UserDTO userDTO) {
+        User existingUser = userRepository.findUserById(id)
+                .orElseThrow(() -> new UserNotFound(id));
+
+        userValidationService.validateUserBeforeEditing(userDTO);
+        if (userDTO.getFirstName() != null) {
+            existingUser.setFirstName(userDTO.getFirstName());
+        }
+        if (userDTO.getLastName() != null) {
+            existingUser.setLastName(userDTO.getLastName());
+        }
+        if (userDTO.getEmail() != null) {
+            existingUser.setEmail(userDTO.getEmail());
+        }
+
+        User updatedUser = userRepository.save(existingUser);
+        log.info("User with id {} was updated.", updatedUser.getId());
+        return objectMapper.convertValue(updatedUser, UserDTO.class);
     }
 
     @Override
@@ -51,4 +70,5 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
+
 }
